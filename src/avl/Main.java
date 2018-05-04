@@ -25,13 +25,12 @@ public class Main {
    av.emOrdem(av.raiz);
    System.out.println();
    
-   
-   
-        
+      
    System.out.println("Raiz: "+av.raiz);
-   System.out.println("Altura: "+av.alturaArvore(av.raiz));
+   System.out.println("Altura: "+av.height(av.raiz));
    System.out.println("Quantidade de Nó: "+av.quantidadeNo(av.raiz));
    av.verifcarAvl(av.raiz);
+   
    
     
     }
