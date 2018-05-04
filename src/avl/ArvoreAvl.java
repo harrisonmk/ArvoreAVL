@@ -5,7 +5,6 @@ public class ArvoreAvl {
     // só é visivel para classes do mesmo pacote
     protected No raiz;
 
-    
     public void inserir(int k) {
         No n = new No(k);
         inserirAVL(this.raiz, n);
@@ -46,7 +45,6 @@ public class ArvoreAvl {
         }
     }
 
-    
     public void verificarBalanceamento(No atual) {
         setBalanceamento(atual);
         int balanceamento = atual.getBalanceamento();
@@ -77,7 +75,6 @@ public class ArvoreAvl {
         }
     }
 
-    
     public void remover(int k) {
         removerAVL(this.raiz, k);
     }
@@ -100,7 +97,6 @@ public class ArvoreAvl {
         }
     }
 
-    
     public void removerNoEncontrado(No aRemover) {
         No r;
 
@@ -142,7 +138,6 @@ public class ArvoreAvl {
         r = null;
     }
 
-    
     public No rotacaoEsquerda(No inicial) {
 
         No direita = inicial.getDireita();
@@ -173,7 +168,6 @@ public class ArvoreAvl {
         return direita;
     }
 
-    
     public No rotacaoDireita(No inicial) {
 
         No esquerda = inicial.getEsquerda();
@@ -204,7 +198,6 @@ public class ArvoreAvl {
         return esquerda;
     }
 
-    
     public No duplaRotacaoEsquerdaDireita(No inicial) {
         inicial.setEsquerda(rotacaoEsquerda(inicial.getEsquerda()));
         return rotacaoDireita(inicial);
@@ -215,7 +208,6 @@ public class ArvoreAvl {
         return rotacaoEsquerda(inicial);
     }
 
-    
     public No sucessor(No q) {
         if (q.getDireita() != null) {
             No r = q.getDireita();
@@ -233,7 +225,6 @@ public class ArvoreAvl {
         }
     }
 
-    
     private int altura(No atual) {
         if (atual == null) {
             return -1;
@@ -253,7 +244,6 @@ public class ArvoreAvl {
         }
     }
 
-    
     private void setBalanceamento(No no) {
         no.setBalanceamento(altura(no.getDireita()) - altura(no.getEsquerda()));
     }
@@ -270,24 +260,20 @@ public class ArvoreAvl {
     }
 
     //retorna o tamanho da arvore
-    public int alturaArvore(No atual) {
-        if (atual == null) {
-            atual.setAltura(-1);
+    int height(No no) {
+
+        int u, v;
+        if (no == null) {
+            return -1;
         }
-
-        if (atual.getEsquerda() == null && atual.getDireita() == null) {
-            atual.setAltura(0);
-
-        } else if (atual.getEsquerda() == null) {
-            atual.setAltura(1 + altura(atual.getDireita()));
-
-        } else if (atual.getDireita() == null) {
-            atual.setAltura(1 + altura(atual.getEsquerda()));
-
+        u = height(no.getEsquerda());
+        v = height(no.getDireita());
+        if (u > v) {
+            no.setAltura(u + 1);
         } else {
-            atual.setAltura(2 + Math.max(altura(atual.getEsquerda()), altura(atual.getDireita())));
+            no.setAltura(v + 1);
         }
-        return atual.getAltura();
+        return no.getAltura();
     }
 
     // retorna a quantidade de nós da arvore
@@ -302,7 +288,7 @@ public class ArvoreAvl {
     // verifica se a arvore é AVL
     public void verifcarAvl(No no) {
 
-        if (alturaArvore(no.getDireita()) - alturaArvore(no.getEsquerda()) <= 1) {
+        if (height(no.getDireita()) - height(no.getEsquerda()) <= 1) {
             System.out.println("é arvore Arvore AVL");
         } else {
             System.out.println("Não é AVL");
